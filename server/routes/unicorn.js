@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Unicorn = require('../models/unicorn');
 
-router.route('/unicorns')
+router.route('/')
     .get(function(req, res) {
         Unicorn.find(function(err, unicorns) {
             if (err)
@@ -27,10 +27,9 @@ router.route('/unicorns')
         });
     });
 
-
-router.route('/unicorns/:unicorn_id')
+router.route('/:unicorn_name')
     .get(function(req, res) {
-        Unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
+        Unicorn.findByName(req.params.unicorn_name, function(err, unicorn) {
             if (err)
                 return res.send(err);
             return res.json(unicorn);
@@ -38,7 +37,7 @@ router.route('/unicorns/:unicorn_id')
     })
 
     .put(function(req, res) {
-        Unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
+        Unicorn.findById(req.params.unicorn_name, function(err, unicorn) {
             if (err)
                 return res.send(err);
 
@@ -52,19 +51,27 @@ router.route('/unicorns/:unicorn_id')
             unicorn.save(function(err) {
                 if (err)
                     return res.send(err);
-                return res.json({ message: 'unicorn updated.', unicorn: unicorn});
+                return res.json({ message: 'unicorn updated.', unicorn: unicorn });
             });
         });
     })
 
     .delete(function(req, res) {
         Unicorn.remove({
-            _id: req.params.unicorn_id
+            _id: req.params.unicorn_name
         }, function(err, unicorn) {
             if (err)
                 return res.send(err);
             return res.json({ message: 'unicorn deleted.'});
         })
     });
+
+router.get('/create', function(req, res) {
+    return res.render('unicorns/new');
+});
+
+router.get('/update/:unicorn_name', function(req, res) {
+    return res.render('unicorns/update', { unicorn_name: unicorn_name });
+});
 
 module.exports = router

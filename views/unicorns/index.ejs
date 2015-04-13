@@ -1,5 +1,5 @@
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
     <head>
         <% include ../partials/head %>
     </head>
@@ -9,10 +9,10 @@
 
             <div class="collection">
                 <% unicorns.forEach(function(unicorn) { %>
-                    <a href="/unicorns/<%= unicorn.id %>" class="collection-item"><%= unicorn.name %></a>
+                    <a href="/<%= unicorn.name %>" class="collection-item"><%= unicorn.name %></a>
                 <% }); %>
             </ul>
 
         </div>
     </body>
-  </html>
+</html>
