@@ -39,12 +39,22 @@ router.get('/update/:unicorn_name', function(req, res) {
     });
 });
 
+router.post('/delete', function(req, res) {
+    Unicorn.remove({
+        _id: req.body.unicorn_id
+    }, function(err, unicorn) {
+        if (err)
+            return res.send(err);
+        return res.redirect('/');
+    })
+});
+
 router.route('/:unicorn_name')
     .get(function(req, res) {
         Unicorn.findOne({name: req.params.unicorn_name}, function(err, unicorn) {
             if (err)
                 return res.send(err);
-            return res.json(unicorn);
+            return res.render('unicorns/show', { unicorn: unicorn });
         });
     })
 
@@ -66,16 +76,6 @@ router.route('/:unicorn_name')
                 return res.json({ message: 'unicorn updated.', unicorn: unicorn });
             });
         });
-    })
-
-    .delete(function(req, res) {
-        Unicorn.remove({
-            _id: req.params.unicorn_name
-        }, function(err, unicorn) {
-            if (err)
-                return res.send(err);
-            return res.json({ message: 'unicorn deleted.'});
-        })
     });
 
 module.exports = router
