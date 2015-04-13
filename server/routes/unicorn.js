@@ -23,7 +23,8 @@ router.route('/')
         unicorn.save(function(err) {
             if (err)
                 return res.send(err);
-            return res.json({ message: 'unicorn created.', unicorn: unicorn });
+            req.flash('success', 'New unicorn ' + unicorn.name + ' created');
+            return res.redirect('/' + unicorn.name);
         });
     });
 
