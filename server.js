@@ -9,7 +9,6 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var favicon = require('serve-favicon');
 var flash = require('express-flash')
 
 mongoose.connect(require('./server/config/db').url);

@@ -7,7 +7,45 @@
     <body>
         <% include ../partials/nav %>
         <h1 class="center-align">Update <%= unicorn.name %></h1>
-        <% include ../partials/form %>
+
+        <div class="row">
+            <form class="col s8 offset-s2" action="/update" method="POST">
+                <input type="hidden" name="unicorn_id" value="<%= unicorn.id %>"/>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="name" id="name" type="text" class="validate" value="<%= unicorn.name %>">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input name="birthday" id="bithday" type="text" class="datepicker" value="<%= unicorn.birthday %>">
+                        <label for="bithday">Birthday</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="weight" id="weight" type="number" class="validate" value="<%= unicorn.weight %>">
+                        <label for="weight">Weight</label>
+                    </div>
+                    <p>
+                      <input name="gender" type="radio" id="gender1" value="f" checked />
+                      <label for="gender1">Female</label>
+                    </p>
+                    <p>
+                      <input name="gender" type="radio" id="gender2" value="m" />
+                      <label for="gender2">Male</label>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="vampireKilled" id="vampireKilled" type="text" class="validate" value="<%= unicorn.vampireKilled %>">
+                        <label for="vampireKilled">Vampires Killed</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </form>
+        </div>
 
         <script type="text/javascript">
             $(document).ready(function() {
