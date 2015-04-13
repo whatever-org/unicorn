@@ -5,14 +5,13 @@
     </head>
 
     <body>
+        <% include ../partials/nav %>
         <div class="container">
-
             <div class="collection">
                 <% unicorns.forEach(function(unicorn) { %>
                     <a href="/<%= unicorn.name %>" class="collection-item"><%= unicorn.name %></a>
                 <% }); %>
             </ul>
-
         </div>
     </body>
 </html>
