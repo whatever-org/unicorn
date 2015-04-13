@@ -6,20 +6,24 @@ router.route('/unicorns')
     .get(function(req, res) {
         Unicorn.find(function(err, unicorns) {
             if (err)
-                res.send(err);
-            res.render('unicorns/index', { unicorns: unicorns })
+                return res.send(err);
+            return res.render('unicorns/index', { unicorns: unicorns })
         });
     })
 
     .post(function(req, res) {
         var unicorn = new Unicorn();
         unicorn.name = req.body.name;
-        unicorn.author = req.body.author;
+        unicorn.birthday = req.body.birthday;
+        unicorn.weight = req.body.weight;
+        unicorn.gender = req.body.gender;
+        unicorn.preferedFoods = req.body.preferedFoods;
+        unicorn.vampireKilled = req.body.vampireKilled;
 
         unicorn.save(function(err) {
             if (err)
-                res.send(err);
-            res.json({ message: 'unicorn created.' });
+                return res.send(err);
+            return res.json({ message: 'unicorn created.', unicorn: unicorn });
         });
     });
 
@@ -28,23 +32,27 @@ router.route('/unicorns/:unicorn_id')
     .get(function(req, res) {
         unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
             if (err)
-                res.send(err);
-            res.json(unicorn);
+                return res.send(err);
+            return res.json(unicorn);
         });
     })
 
     .put(function(req, res) {
         unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             unicorn.name = req.body.name;
-            unicorn.author = req.body.author;
+            unicorn.birthday = req.body.birthday;
+            unicorn.weight = req.body.weight;
+            unicorn.gender = req.body.gender;
+            unicorn.preferedFoods = req.body.preferedFoods;
+            unicorn.vampireKilled = req.body.vampireKilled;
 
             unicorn.save(function(err) {
                 if (err)
-                    res.send(err);
-                res.json({ message: 'unicorn updated.'});
+                    return res.send(err);
+                return res.json({ message: 'unicorn updated.', unicorn: unicorn});
             });
         });
     })
@@ -54,8 +62,8 @@ router.route('/unicorns/:unicorn_id')
             _id: req.params.unicorn_id
         }, function(err, unicorn) {
             if (err)
-                res.send(err);
-            res.json({ message: 'unicorn deleted.'});
+                return res.send(err);
+            return res.json({ message: 'unicorn deleted.'});
         })
     });
 
