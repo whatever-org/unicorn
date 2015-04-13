@@ -30,7 +30,7 @@ router.route('/unicorns')
 
 router.route('/unicorns/:unicorn_id')
     .get(function(req, res) {
-        unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
+        Unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
             if (err)
                 return res.send(err);
             return res.json(unicorn);
@@ -38,7 +38,7 @@ router.route('/unicorns/:unicorn_id')
     })
 
     .put(function(req, res) {
-        unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
+        Unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
             if (err)
                 return res.send(err);
 
@@ -58,7 +58,7 @@ router.route('/unicorns/:unicorn_id')
     })
 
     .delete(function(req, res) {
-        unicorn.remove({
+        Unicorn.remove({
             _id: req.params.unicorn_id
         }, function(err, unicorn) {
             if (err)
