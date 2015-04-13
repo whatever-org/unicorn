@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/head %>
+    </head>
+
+    <body>
+        <h1 class="center-align">Update <%= unicorn[0].name %></h1>
+        <% include ../partials/form %>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.datepicker').pickadate();
+            });
+        </script>
+    </body>
+</html>
