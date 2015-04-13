@@ -32,7 +32,7 @@ router.get('/create', function(req, res) {
 });
 
 router.get('/update/:unicorn_name', function(req, res) {
-    Unicorn.find({name: req.params.unicorn_name}, function(err, unicorn) {
+    Unicorn.findOne({name: req.params.unicorn_name}, function(err, unicorn) {
         if (err)
             return res.send(err);
         return res.render('unicorns/update', { unicorn: unicorn });
@@ -41,7 +41,7 @@ router.get('/update/:unicorn_name', function(req, res) {
 
 router.route('/:unicorn_name')
     .get(function(req, res) {
-        Unicorn.find({name: req.params.unicorn_name}, function(err, unicorn) {
+        Unicorn.findOne({name: req.params.unicorn_name}, function(err, unicorn) {
             if (err)
                 return res.send(err);
             return res.json(unicorn);
