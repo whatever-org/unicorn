@@ -2,12 +2,31 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ResourceSchema = new Schema({
-    name: String,
-    birthday: Date,
-    weight: Number,
-    gender: String,
-    PreferedFoods: String,
-    VampireKilled: Number
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        index: true
+    },
+    birthday: {
+        type: Date,
+        required: true
+    },
+    weight: {
+       type: Number,
+       required: true,
+       min: 0
+    },
+    gender: {
+        type: String,
+        required: true,
+        match: /^[mf]$/
+    },
+    preferedFoods: [String],
+    vampireKilled: {
+        type: Number,
+        min: 0
+    },
 });
 
 module.exports = mongoose.model('Unicorn', ResourceSchema);
