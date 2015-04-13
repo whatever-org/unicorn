@@ -51,6 +51,27 @@ router.post('/delete', function(req, res) {
     })
 });
 
+router.post('/update', function(req, res) {
+        Unicorn.findById(req.body.unicorn_id, function(err, unicorn) {
+            if (err)
+                return res.send(err);
+
+            unicorn.name = req.body.name;
+            unicorn.birthday = req.body.birthday;
+            unicorn.weight = req.body.weight;
+            unicorn.gender = req.body.gender;
+            unicorn.preferedFoods = req.body.preferedFoods;
+            unicorn.vampireKilled = req.body.vampireKilled;
+
+            unicorn.save(function(err) {
+                if (err)
+                    return res.send(err);
+                req.flash('success', 'The unicorn ' + unicorn.name + ' has been updated');
+                return res.redirect('/' + unicorn.name);
+            });
+        });
+    });
+
 router.route('/:unicorn_name')
     .get(function(req, res) {
         Unicorn.findOne({name: req.params.unicorn_name}, function(err, unicorn) {

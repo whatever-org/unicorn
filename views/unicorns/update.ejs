@@ -27,11 +27,13 @@
                         <label for="weight">Weight</label>
                     </div>
                     <p>
-                      <input name="gender" type="radio" id="gender1" value="f" checked />
+                      <input name="gender" type="radio" id="gender1" value="f"
+                        <%= unicorn.gender == 'f' ? 'checked' : '' %> />
                       <label for="gender1">Female</label>
                     </p>
                     <p>
-                      <input name="gender" type="radio" id="gender2" value="m" />
+                      <input name="gender" type="radio" id="gender2" value="m"
+                        <%= unicorn.gender == 'm' ? 'checked' : '' %> />
                       <label for="gender2">Male</label>
                     </p>
                 </div>
