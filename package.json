@@ -4,7 +4,7 @@
   "description": "unicorn",
   "main": "server.js",
   "repository": {
-    "type": "git",
+    "type": "git"
   },
   "author": "Adrien Louis-Rossignol, Arnaud Cavat",
   "license": "ISC",
