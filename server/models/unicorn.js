@@ -29,4 +29,8 @@ var ResourceSchema = new Schema({
     },
 });
 
+ResourceSchema.static('findByName', function (name, callback) {
+  return this.find({ name: name }, callback);
+});
+
 module.exports = mongoose.model('Unicorn', ResourceSchema);
