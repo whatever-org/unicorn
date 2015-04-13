@@ -7,7 +7,7 @@ router.route('/unicorns')
         Unicorn.find(function(err, unicorns) {
             if (err)
                 res.send(err);
-            res.json(unicorns);
+            res.render('unicorns/index', { unicorns: unicorns })
         });
     })
 

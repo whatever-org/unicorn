@@ -11,6 +11,7 @@ var morgan = require('morgan');
 
 mongoose.connect(require('./server/config/db').url);
 
+app.set('view engine', 'ejs');
 app.use(morgan('dev'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
