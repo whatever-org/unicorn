@@ -23,7 +23,7 @@ router.route('/')
         unicorn.save(function(err) {
             if (err)
                 return res.send(err);
-            req.flash('success', 'New unicorn ' + unicorn.name + ' created');
+            req.flash('success', 'New unicorn ' + unicorn.name + ' has been created');
             return res.redirect('/' + unicorn.name);
         });
     });
@@ -46,6 +46,7 @@ router.post('/delete', function(req, res) {
     }, function(err, unicorn) {
         if (err)
             return res.send(err);
+        req.flash('success', 'The unicorn has been deleted');
         return res.redirect('/');
     })
 });
@@ -60,7 +61,7 @@ router.route('/:unicorn_name')
     })
 
     .put(function(req, res) {
-        Unicorn.findById(req.params.unicorn_name, function(err, unicorn) {
+        Unicorn.findById(req.params.unicorn_id, function(err, unicorn) {
             if (err)
                 return res.send(err);
 
@@ -74,7 +75,8 @@ router.route('/:unicorn_name')
             unicorn.save(function(err) {
                 if (err)
                     return res.send(err);
-                return res.json({ message: 'unicorn updated.', unicorn: unicorn });
+                req.flash('success', 'The unicorn ' + unicorn.name + ' has been updated');
+                return res.redirect('/' + unicorn.name);
             });
         });
     });
