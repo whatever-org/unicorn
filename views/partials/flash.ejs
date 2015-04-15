@@ -15,3 +15,15 @@
         Materialize.toast("<%= messages.info %>", 3000);
     </script>
 <% } %>
+
+<% if(messages.validation) { %>
+    <div class="row">
+        <div class="col s6 card-panel red darken-4 white-text">
+            <ul>
+                <% for( p in messages.validation[0].errors) { %>
+                    <li><%= messages.validation[0].errors[p].message %></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+<% } %>

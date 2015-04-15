@@ -6,7 +6,10 @@
 
     <body>
         <% include ../partials/nav %>
-        <% include ../partials/form %>
+        <div class="container">
+            <% include ../partials/flash %>
+            <% include ../partials/form %>
+        </div>
 
         <script type="text/javascript">
             $(document).ready(function() {

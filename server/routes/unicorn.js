@@ -21,9 +21,12 @@ router.route('/')
         unicorn.vampireKilled = req.body.vampireKilled;
 
         unicorn.save(function(err) {
-            if (err)
-                return res.send(err);
-            req.flash('success', 'New unicorn ' + unicorn.name + ' has been created');
+            if (err) {
+                req.flash('validation', err);
+                return res.redirect('/create');
+            }
+            else
+                req.flash('success', 'New unicorn ' + unicorn.name + ' has been created');
             return res.redirect('/' + unicorn.name);
         });
     });
@@ -56,6 +59,7 @@ router.post('/update', function(req, res) {
             if (err)
                 return res.send(err);
 
+            var unicornName = unicorn.name;
             unicorn.name = req.body.name;
             unicorn.birthday = req.body.birthday;
             unicorn.weight = req.body.weight;
@@ -64,9 +68,12 @@ router.post('/update', function(req, res) {
             unicorn.vampireKilled = req.body.vampireKilled;
 
             unicorn.save(function(err) {
-                if (err)
-                    return res.send(err);
-                req.flash('success', 'The unicorn ' + unicorn.name + ' has been updated');
+                if (err){
+                    req.flash('validation', err);
+                    return res.redirect('/update/' + unicornName);
+                } else {
+                    req.flash('success', 'The unicorn ' + unicorn.name + ' has been updated');
+                }
                 return res.redirect('/' + unicorn.name);
             });
         });
